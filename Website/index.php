@@ -5,6 +5,7 @@
 <body>
 W.I.P.
 Werkt cronjobs nu ook?
+En het automatisch updaten met GIT?
 
 </body>
 </html>
