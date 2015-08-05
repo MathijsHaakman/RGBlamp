@@ -24,25 +24,7 @@ sec_session_start();
     </div>
 </div>
 <div id="content">
-    Soms kun je wel eens denken; <br>
-    Ik zie het somber in, <br>
-    maar met een beetje licht <br>
-    dan krijg je toch weer zin. <br> <br>
-
-
-    Licht houd je uit het donker. <br>
-    Het schijnt je even bij. <br>
-    Licht tilt je uit een dipje, <br>
-    licht maakt je zeker blij. <br> <br>
-
-
-    Jij weet dat ik graag heb <br>
-    dat je alles helder ziet. <br>
-    Daarom kocht ik dit voor jou <br>
-    'k hoop dat je ervan geniet. <br> <br>
-
-    Pieter Feller ©<br>
-
+    Let there be light!
 </div>
 </body>
 </html>

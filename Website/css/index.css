@@ -52,6 +52,18 @@ body {
 	font-weight:					bold;
 }
 
+#top-bar > #top-bar-content .menu-item-right {
+    height:							60px;
+    line-height:					80px;
+    padding:						0 5px;
+    background-color: 				#696969;
+    margin:							-25px 5px 0 5px;
+    display:						inline-block;
+    text-decoration:				none;
+    color:							#DFDFDF;
+    font-weight:					bold;
+}
+
 #top-bar > #top-bar-content .menu-item:first-child {
 	margin-left:					6%;
 }
