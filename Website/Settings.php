@@ -6,16 +6,19 @@ include_once 'includes/querys.php';
 
 sec_session_start();
 
-
-
-if ( isset($_POST['GPIOPinRed']) || isset($_POST['GPIOPinGreen']) || isset($_POST['GPIOPinBlue']) ) {
-    updateValueById("GPIOPinRed", $_POST['GPIOPinRed']);
-    updateValueById("GPIOPinGreen", $_POST['GPIOPinGreen']);
-    updateValueById("GPIOPinBlue", $_POST['GPIOPinBlue']);
+if(isset($_POST['maxLamps'])){
+    setMaxLamps($_POST['maxLamps'], $_SESSION['user_id']);
 }
-$selectedRed = getValueById("GPIOPinRed");
-$selectedGreen = getValueById("GPIOPinGreen");
-$selectedBlue = getValueById("GPIOPinBlue");
+
+//deleteUnnecessaryRows($_SESSION['UserID'], getMaxLampsById($_SESSION['user_id']));
+
+if(isset($_POST['GPIOPinRed1'])){
+    for($i = 1; $i <= getMaxLampsById($_SESSION['user_id']); $i++){
+        updateGPIOPin($_SESSION['user_id'], $i, $_POST["GPIOPinRed" . $i], $_POST["GPIOPinGreen" . $i], $_POST["GPIOPinBlue" . $i]);
+    }
+}
+$maxLamps = getMaxLampsById($_SESSION['user_id']);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,11 +35,28 @@ $selectedBlue = getValueById("GPIOPinBlue");
     </div>
 </div>
 <div id="content">
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+        <table>
+            <tr>
+                <td>Aantal lampen: </td>
+                <td><input type="number" name="maxLamps" min="0" max="8" value="<?php echo $maxLamps; ?>" oninput="<?php echo $maxLamps;?> = maxLamps.value"></td>
+            </tr>
+            <tr>
+                <td><?php echo $_SESSION['maxLamps'];?></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Save" name="submit">
+                </td>
+            </tr>
+        </table>
+    </form><p></p>
     <?php
-    include 'includes/dropdownGPIO.php';
-    ?>
+    include 'includes/GPIOPinChooser.php';
+    showGPIOPins($maxLamps, $_SERVER['PHP_SELF']);
+    ?><br><Br>
     Choose the GPIO pins you used via <a href="images/GPIOPins.png">this</a>  scheme.<br>
-    Select in the settings above the physical pins you connected your lights to.
+    Select in the settings above the physical pins you connected your lights to.<br>
 </div>
 </body>
 </html>

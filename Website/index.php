@@ -24,6 +24,7 @@ sec_session_start();
 </div>
 <div id="content">
     Dit is de indexpagina!<br>
+    <?php echo $_SESSION['user_id']; ?>
 </div>
 </body>
 </html>
