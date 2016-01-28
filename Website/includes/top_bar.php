@@ -4,7 +4,7 @@
 </a>
 
 <a class='menu-item'
-   href="/RGBlamp/Website/lamp.php">
+   href="/RGBlamp/Website/light.php">
 	Lights
 </a>
 
