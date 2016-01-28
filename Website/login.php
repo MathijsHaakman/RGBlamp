@@ -23,7 +23,8 @@ sec_session_start();
 						<td>
 							<input type="text"
 								   name="email"
-								   placeholder="E-mailadres" />
+								   placeholder="E-mailadres"
+								   autofocus/>
 						</td>
 					</tr>
 					<tr>
