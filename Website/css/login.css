@@ -14,7 +14,6 @@ input[type='password'] {
 body {
 	margin:					0;
 	background-color:		#FBFCEB;
-	background-image:		url('/img/clouds.png');
 	overflow:				hidden;
 	-webkit-animation:		clouds 240s linear infinite;
 	animation:				clouds 240s linear infinite;
