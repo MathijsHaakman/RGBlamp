@@ -7,14 +7,14 @@ function getPWM($colour, $userId, $lightNumber)
     if ($mysqli->connect_error) {
         die("Connection failed: " . $mysqli->connect_error);
     }
-    $sql = "SELECT \"$colour\" FROM Settings_per_light WHERE UserID = \"$userId\" AND LightNumber = \"$lightNumber\"";
+    $sql = "SELECT $colour FROM Settings_per_light WHERE UserID = \"$userId\" AND LightNumber = \"$lightNumber\"";
     $result = $mysqli->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $SQLResult = $row["$colour"];
         }
     } else {
-        echo "No results for getValueById\n";
+        $SQLResult = -1;
     }
     return $SQLResult;
 }

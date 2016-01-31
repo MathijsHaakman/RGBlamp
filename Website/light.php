@@ -2,7 +2,7 @@
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 include_once 'includes/check_login.php';
-include_once 'includes/querys.php';
+include_once 'includes/queries.php';
 
 sec_session_start();
 //if ( isset($_POST['AnalogValueRed']) || isset($_POST['AnalogValueGreen']) || isset($_POST['AnalogValueBlue']) ) {
