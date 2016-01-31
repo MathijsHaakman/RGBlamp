@@ -19,6 +19,22 @@ function getPWM($colour, $userId, $lightNumber)
     return $SQLResult;
 }
 
+function updatePWM($id, $lightNr, $PWMRed, $PWMGreen, $PWMBlue){
+    global $mysqli;
+    if($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+    $sql = "INSERT INTO Settings_per_light (UserID, LightNumber, PWMRed, PWMGreen, PWMBlue) VALUES
+            (\"$id\", \"$lightNr\", \"$PWMRed\", \"$PWMGreen\", \"$PWMBlue\")
+            ON DUPLICATE KEY
+            UPDATE PWMRed = \"$PWMRed\", PWMGreen = \"$PWMGreen\", PWMBlue = \"$PWMBlue\"
+            ";
+    if ($mysqli->query($sql) === TRUE) {
+    } else {
+        echo "Update failed.";
+    }
+}
+
 function updateGPIOPin($id, $lightNr, $PinRed, $PinGreen, $PinBlue)
 {
     global $mysqli;

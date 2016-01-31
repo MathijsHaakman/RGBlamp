@@ -5,11 +5,9 @@ include_once 'includes/check_login.php';
 include_once 'includes/queries.php';
 
 sec_session_start();
-//if ( isset($_POST['AnalogValueRed']) || isset($_POST['AnalogValueGreen']) || isset($_POST['AnalogValueBlue']) ) {
-//    updateValueById("AnalogValueRed", $_POST['AnalogValueRed']);
-//    updateValueById("AnalogValueGreen", $_POST['AnalogValueGreen']);
-//    updateValueById("AnalogValueBlue", $_POST['AnalogValueBlue']);
-//}
+if ( isset($_POST['AnalogValueRed']) || isset($_POST['AnalogValueGreen']) || isset($_POST['AnalogValueBlue']) ) {
+    updatePWM($_SESSION['user_id'], 1, $_POST['AnalogValueRed'], $_POST['AnalogValueGreen'], $_POST['AnalogValueBlue']);
+}
 
 $maxLamps = getMaxLampsById($_SESSION['user_id']);
 
