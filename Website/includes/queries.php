@@ -103,7 +103,7 @@ function getSelected($colour, $lampNr, $id){
     return $SQLResult;
 }
 
-function deleteUnnecessaryRows($userID, $maxLamps){
+function deleteUnnecessaryRows($userID, $setMaxLamps){
     global $mysqli;
     if($mysqli->connect_error){
         die("Connection failed: " . $mysqli->connect_error);
@@ -112,15 +112,17 @@ function deleteUnnecessaryRows($userID, $maxLamps){
     $result = $mysqli->query($sql);
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
-            $SQLResult = $row["maxLights"];
+            $maxLampsInDatabase = $row["maxLights"];
         }
     } else {
         return null;
     }
-    if($SQLResult > $maxLamps){
-        for($SQLResult; $SQLResult > $maxLamps; $SQLResult--){
-            $sql = "DELETE FROM Settings_per_light WHERE UserID = \"$userID\" AND LightNumber = \"$SQLResult\"";
+    if($maxLampsInDatabase > $setMaxLamps) {
+        for ($maxLampsInDatabase; $maxLampsInDatabase > $setMaxLamps; $maxLampsInDatabase--) {
+            $sql = "DELETE FROM Settings_per_light WHERE UserID = \"$userID\" AND LightNumber = \"$maxLampsInDatabase\"";
+//            DELETE FROM `Settings_per_light` WHERE UserID = 2 AND LightNumber = 7
             $mysqli->query($sql);
+            echo "$maxLampsInDatabase";
         }
     }
 }

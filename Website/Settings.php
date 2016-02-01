@@ -7,10 +7,9 @@ include_once 'includes/queries.php';
 sec_session_start();
 
 if(isset($_POST['maxLamps'])){
+    deleteUnnecessaryRows($_SESSION['user_id'], $_POST['maxLamps']);
     setMaxLamps($_POST['maxLamps'], $_SESSION['user_id']);
 }
-
-//deleteUnnecessaryRows($_SESSION['UserID'], getMaxLampsById($_SESSION['user_id']));
 
 if(isset($_POST['GPIOPinRed1'])){
     for($i = 1; $i <= getMaxLampsById($_SESSION['user_id']); $i++){
