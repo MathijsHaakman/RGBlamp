@@ -7,7 +7,12 @@ include_once 'includes/queries.php';
 sec_session_start();
 
 if(isset($_POST['maxLamps'])){
-    deleteUnnecessaryRows($_SESSION['user_id'], $_POST['maxLamps']);
+    if($_POST['maxLamps'] < getMaxLampsById($_SESSION['user_id'])) {
+        deleteLightSettings($_SESSION['user_id'], getMaxLampsById($_SESSION['user_id']), $_POST['maxLamps']);
+//        deleteUnnecessaryRows($_SESSION['user_id'], $_POST['maxLamps']);
+    } else{
+        addDefaultLightSettings($_SESSION['user_id'], $_POST['maxLamps'], getMaxLampsById($_SESSION['user_id']));
+    }
     setMaxLamps($_POST['maxLamps'], $_SESSION['user_id']);
 }
 
