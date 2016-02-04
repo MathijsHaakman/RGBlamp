@@ -5,17 +5,19 @@ include_once 'includes/check_login.php';
 include_once 'includes/queries.php';
 
 sec_session_start();
-if ( isset($_POST['AnalogValueRed']) || isset($_POST['AnalogValueGreen']) || isset($_POST['AnalogValueBlue']) ) {
-    updatePWM($_SESSION['user_id'], 1, $_POST['AnalogValueRed'], $_POST['AnalogValueGreen'], $_POST['AnalogValueBlue']);
-}
 
 $maxLamps = getMaxLampsById($_SESSION['user_id']);
 
-$analogRed = getPWM("PWMRed", $_SESSION['user_id'], 1);
-$analogGreen = getPWM("PWMGreen", $_SESSION['user_id'], 1);
-$analogBlue = getPWM("PWMBlue", $_SESSION['user_id'], 1);
+if ( isset($_POST['AnalogValueRed1'])) {
+    for($p = 1; $p <= $maxLamps; $p++){
+        updatePWM($_SESSION['user_id'], $p, $_POST['AnalogValueRed'.$p], $_POST['AnalogValueGreen'.$p], $_POST['AnalogValueBlue'.$p]);
+    }
+}
 
-
+$PWMArray = array();
+for($iteration = 1; $iteration <= $maxLamps; $iteration++){
+    array_push($PWMArray, array(getPWM("PWMRed", $_SESSION['user_id'], $iteration),getPWM("PWMGreen", $_SESSION['user_id'], $iteration),getPWM("PWMBlue", $_SESSION['user_id'], $iteration)));
+}
 
 //shell_exec("pigs p $GPIOPinRed $analogRed p $GPIOPinGreen $analogGreen p $GPIOPinBlue $analogBlue");
 ?>
@@ -44,7 +46,8 @@ $analogBlue = getPWM("PWMBlue", $_SESSION['user_id'], 1);
         </label>
     </div> -->
     <?php
-    include 'includes/AnalogValueChooser.php';
+        include 'includes/AnalogValueChooser.php';
+        showPWMSetter($maxLamps, $_SERVER['PHP_SELF'], $PWMArray);
     ?>
 </div>
 </body>
