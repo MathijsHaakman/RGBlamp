@@ -6,16 +6,16 @@ include_once 'includes/queries.php';
 
 sec_session_start();
 
-$maxLamps = getMaxLampsById($_SESSION['user_id']);
+$maxLights = getMaxLampsById($_SESSION['user_id']);
 
 if ( isset($_POST['AnalogValueRed1'])) {
-    for($p = 1; $p <= $maxLamps; $p++){
+    for($p = 1; $p <= $maxLights; $p++){
         updatePWM($_SESSION['user_id'], $p, $_POST['AnalogValueRed'.$p], $_POST['AnalogValueGreen'.$p], $_POST['AnalogValueBlue'.$p]);
     }
 }
 
 $PWMArray = array();
-for($iteration = 1; $iteration <= $maxLamps; $iteration++){
+for($iteration = 1; $iteration <= $maxLights; $iteration++){
     array_push($PWMArray, array(getPWM("PWMRed", $_SESSION['user_id'], $iteration),getPWM("PWMGreen", $_SESSION['user_id'], $iteration),getPWM("PWMBlue", $_SESSION['user_id'], $iteration)));
 }
 
@@ -24,7 +24,7 @@ for($iteration = 1; $iteration <= $maxLamps; $iteration++){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RGB lamp</title>
+    <title>RGB light</title>
 
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/onoffswitch.css">
@@ -47,7 +47,7 @@ for($iteration = 1; $iteration <= $maxLamps; $iteration++){
     </div> -->
     <?php
         include 'includes/AnalogValueChooser.php';
-        showPWMSetter($maxLamps, $_SERVER['PHP_SELF'], $PWMArray);
+        showPWMSetter($maxLights, $_SERVER['PHP_SELF'], $PWMArray);
     ?>
 </div>
 </body>
