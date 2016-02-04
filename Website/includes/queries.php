@@ -118,7 +118,8 @@ function deleteLightSettings($userID, $maxLampsInDatabase, $setMaxLamps){
 
 function addDefaultLightSettings($userID, $setMaxLamps, $maxLampsInDatabase){
     global $mysqli;
-    for($maxLampsInDatabase+1; $maxLampsInDatabase <= $setMaxLamps; $maxLampsInDatabase++){
+    $maxLampsInDatabase=$maxLampsInDatabase+1;
+    for($maxLampsInDatabase; $maxLampsInDatabase <= $setMaxLamps; $maxLampsInDatabase++){
         $sql = "INSERT INTO Settings_per_light
                 VALUES (\"$userID\", \"$maxLampsInDatabase\", NULL, 0, NULL, 0, NULL, 0)";
         $mysqli->query($sql);

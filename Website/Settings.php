@@ -6,14 +6,13 @@ include_once 'includes/queries.php';
 
 sec_session_start();
 
-if(isset($_POST['maxLamps'])){
-    if($_POST['maxLamps'] < getMaxLampsById($_SESSION['user_id'])) {
-        deleteLightSettings($_SESSION['user_id'], getMaxLampsById($_SESSION['user_id']), $_POST['maxLamps']);
-//        deleteUnnecessaryRows($_SESSION['user_id'], $_POST['maxLamps']);
+if(isset($_POST['maxLights'])){
+    if($_POST['maxLights'] < getMaxLampsById($_SESSION['user_id'])) {
+        deleteLightSettings($_SESSION['user_id'], getMaxLampsById($_SESSION['user_id']), $_POST['maxLights']);
     } else{
-        addDefaultLightSettings($_SESSION['user_id'], $_POST['maxLamps'], getMaxLampsById($_SESSION['user_id']));
+        addDefaultLightSettings($_SESSION['user_id'], $_POST['maxLights'], getMaxLampsById($_SESSION['user_id']));
     }
-    setMaxLamps($_POST['maxLamps'], $_SESSION['user_id']);
+    setMaxLamps($_POST['maxLights'], $_SESSION['user_id']);
 }
 
 if(isset($_POST['GPIOPinRed1'])){
@@ -21,7 +20,7 @@ if(isset($_POST['GPIOPinRed1'])){
         updateGPIOPin($_SESSION['user_id'], $i, $_POST["GPIOPinRed" . $i], $_POST["GPIOPinGreen" . $i], $_POST["GPIOPinBlue" . $i]);
     }
 }
-$maxLamps = getMaxLampsById($_SESSION['user_id']);
+$maxLights = getMaxLampsById($_SESSION['user_id']);
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +42,7 @@ $maxLamps = getMaxLampsById($_SESSION['user_id']);
         <table>
             <tr>
                 <td>Aantal lampen: </td>
-                <td><input type="number" name="maxLamps" min="0" max="8" value="<?php echo $maxLamps; ?>" oninput="<?php echo $maxLamps;?> = maxLamps.value"></td>
+                <td><input type="number" name="maxLights" min="0" max="8" value="<?php echo $maxLights; ?>" oninput="<?php echo $maxLights;?> = maxLights.value"></td>
             </tr>
             <tr>
                 <td><?php echo $_SESSION['maxLamps'];?></td>
@@ -57,7 +56,7 @@ $maxLamps = getMaxLampsById($_SESSION['user_id']);
     </form><p></p>
     <?php
     include 'includes/GPIOPinChooser.php';
-    showGPIOPins($maxLamps, $_SERVER['PHP_SELF']);
+    showGPIOPins($maxLights, $_SERVER['PHP_SELF']);
     ?><br><Br>
     Choose the GPIO pins you used via <a href="images/GPIOPins.png">this</a>  scheme.<br>
     Select in the settings above the physical pins you connected your lights to.<br>
