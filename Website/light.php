@@ -18,8 +18,9 @@ $PWMArray = array();
 for($iteration = 1; $iteration <= $maxLights; $iteration++){
     array_push($PWMArray, array(getPWM("PWMRed", $_SESSION['user_id'], $iteration),getPWM("PWMGreen", $_SESSION['user_id'], $iteration),getPWM("PWMBlue", $_SESSION['user_id'], $iteration)));
 }
-
-//shell_exec("pigs p $GPIOPinRed $analogRed p $GPIOPinGreen $analogGreen p $GPIOPinBlue $analogBlue");
+for($q = 1; $q <= $maxLights; $q++){
+    shell_exec("pigs p " . getSelected("GPIOPinRed", $q, $_SESSION['user_id']) . " " . getPWM("PWMRed", $_SESSION['user_id'], $q) . " p " . getSelected("GPIOPinGreen", $q, $_SESSION['user_id']) . " ". getPWM("PWMGreen", $_SESSION['user_id'], $q) . " p " . getSelected("GPIOPinBlue", $q, $_SESSION['user_id']) . " " . getPWM("PWMBlue", $_SESSION['user_id'], $q));
+}
 ?>
 <!DOCTYPE html>
 <html>

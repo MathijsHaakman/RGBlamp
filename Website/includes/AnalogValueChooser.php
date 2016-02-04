@@ -1,4 +1,4 @@
-our<?php
+<?php
 function showPWMSetter($maxLights, $formReturnPage, $PWMArray){
     echo "<form action=\"$formReturnPage\" method=\"post\"><table><tr><td>Analog values</td></tr>";
     for($x = 1; $x <= $maxLights; $x++){
